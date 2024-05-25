@@ -7,17 +7,8 @@ const port = 6000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/jobs', async (req, res) => {
-  const queryOptions = {
-    keyword: 'product manager',
-    location: 'India',
-    dateSincePosted: 'past Week',
-    jobType: 'full time',
-    remoteFilter: 'remote',
-    salary: '100000',
-    
-    limit: '10'
-  };
+app.post('/jobs', async (req, res) => {
+  const queryOptions = req.body;
 
   try {
     const response = await linkedIn.query(queryOptions);
